@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C7867A31B1150660014CFC6 /* Stops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7867A21B1150660014CFC6 /* Stops.swift */; };
 		6C7867A51B1150EA0014CFC6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7867A41B1150EA0014CFC6 /* CoreLocation.framework */; };
 		6C7867A71B1150F00014CFC6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7867A61B1150F00014CFC6 /* CoreData.framework */; };
+		6C7867A91B1178480014CFC6 /* stop_times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6C7867A81B1178480014CFC6 /* stop_times.csv */; };
+		6C7867AB1B1178970014CFC6 /* trips.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6C7867AA1B1178970014CFC6 /* trips.csv */; };
+		6C7867AD1B1178C10014CFC6 /* routes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6C7867AC1B1178C10014CFC6 /* routes.csv */; };
 		6CA75FC31B114E3900EFC1B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA75FC21B114E3900EFC1B1 /* AppDelegate.swift */; };
 		6CA75FC61B114E3900EFC1B1 /* NextPath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CA75FC41B114E3900EFC1B1 /* NextPath.xcdatamodeld */; };
 		6CA75FC81B114E3900EFC1B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA75FC71B114E3900EFC1B1 /* ViewController.swift */; };
@@ -19,6 +21,11 @@
 		6CA75FDC1B114E3900EFC1B1 /* NextPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA75FDB1B114E3900EFC1B1 /* NextPathTests.swift */; };
 		6CA75FE61B114E6500EFC1B1 /* CSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA75FE51B114E6500EFC1B1 /* CSV.swift */; };
 		6CA75FE81B114ED700EFC1B1 /* stops.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6CA75FE71B114ED700EFC1B1 /* stops.csv */; };
+		6CDABB491B12701F00CBD420 /* StopTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDABB481B12701F00CBD420 /* StopTimes.swift */; };
+		6CDABB4B1B12702000CBD420 /* Trips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDABB4A1B12702000CBD420 /* Trips.swift */; };
+		6CDABB4D1B12702000CBD420 /* Stops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDABB4C1B12702000CBD420 /* Stops.swift */; };
+		6CDABB4F1B12702000CBD420 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDABB4E1B12702000CBD420 /* Routes.swift */; };
+		6CDABB511B129DA100CBD420 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDABB501B129DA100CBD420 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,9 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6C7867A21B1150660014CFC6 /* Stops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stops.swift; sourceTree = "<group>"; };
 		6C7867A41B1150EA0014CFC6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6C7867A61B1150F00014CFC6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6C7867A81B1178480014CFC6 /* stop_times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.csv; sourceTree = "<group>"; };
+		6C7867AA1B1178970014CFC6 /* trips.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.csv; sourceTree = "<group>"; };
+		6C7867AC1B1178C10014CFC6 /* routes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = routes.csv; sourceTree = "<group>"; };
 		6CA75FBD1B114E3900EFC1B1 /* NextPath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextPath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA75FC11B114E3900EFC1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CA75FC21B114E3900EFC1B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +57,11 @@
 		6CA75FDB1B114E3900EFC1B1 /* NextPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPathTests.swift; sourceTree = "<group>"; };
 		6CA75FE51B114E6500EFC1B1 /* CSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSV.swift; sourceTree = "<group>"; };
 		6CA75FE71B114ED700EFC1B1 /* stops.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.csv; sourceTree = "<group>"; };
+		6CDABB481B12701F00CBD420 /* StopTimes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTimes.swift; sourceTree = "<group>"; };
+		6CDABB4A1B12702000CBD420 /* Trips.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trips.swift; sourceTree = "<group>"; };
+		6CDABB4C1B12702000CBD420 /* Stops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stops.swift; sourceTree = "<group>"; };
+		6CDABB4E1B12702000CBD420 /* Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		6CDABB501B129DA100CBD420 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +107,9 @@
 		6CA75FBF1B114E3900EFC1B1 /* NextPath */ = {
 			isa = PBXGroup;
 			children = (
+				6CDABB411B125E4F00CBD420 /* Model */,
 				6CA75FC21B114E3900EFC1B1 /* AppDelegate.swift */,
 				6CA75FC71B114E3900EFC1B1 /* ViewController.swift */,
-				6C7867A21B1150660014CFC6 /* Stops.swift */,
 				6CA75FE51B114E6500EFC1B1 /* CSV.swift */,
 				6CA75FC91B114E3900EFC1B1 /* Main.storyboard */,
 				6CA75FCC1B114E3900EFC1B1 /* Images.xcassets */,
@@ -109,6 +123,9 @@
 		6CA75FC01B114E3900EFC1B1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C7867A81B1178480014CFC6 /* stop_times.csv */,
+				6C7867AC1B1178C10014CFC6 /* routes.csv */,
+				6C7867AA1B1178970014CFC6 /* trips.csv */,
 				6CA75FE71B114ED700EFC1B1 /* stops.csv */,
 				6CA75FC11B114E3900EFC1B1 /* Info.plist */,
 			);
@@ -130,6 +147,18 @@
 				6CA75FDA1B114E3900EFC1B1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CDABB411B125E4F00CBD420 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CDABB501B129DA100CBD420 /* Data.swift */,
+				6CDABB4E1B12702000CBD420 /* Routes.swift */,
+				6CDABB4C1B12702000CBD420 /* Stops.swift */,
+				6CDABB4A1B12702000CBD420 /* Trips.swift */,
+				6CDABB481B12701F00CBD420 /* StopTimes.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,8 +243,11 @@
 			files = (
 				6CA75FE81B114ED700EFC1B1 /* stops.csv in Resources */,
 				6CA75FCB1B114E3900EFC1B1 /* Main.storyboard in Resources */,
+				6C7867AD1B1178C10014CFC6 /* routes.csv in Resources */,
+				6C7867A91B1178480014CFC6 /* stop_times.csv in Resources */,
 				6CA75FD01B114E3900EFC1B1 /* LaunchScreen.xib in Resources */,
 				6CA75FCD1B114E3900EFC1B1 /* Images.xcassets in Resources */,
+				6C7867AB1B1178970014CFC6 /* trips.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,10 +266,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CA75FE61B114E6500EFC1B1 /* CSV.swift in Sources */,
+				6CDABB4F1B12702000CBD420 /* Routes.swift in Sources */,
+				6CDABB4D1B12702000CBD420 /* Stops.swift in Sources */,
 				6CA75FC81B114E3900EFC1B1 /* ViewController.swift in Sources */,
+				6CDABB4B1B12702000CBD420 /* Trips.swift in Sources */,
+				6CDABB511B129DA100CBD420 /* Data.swift in Sources */,
+				6CDABB491B12701F00CBD420 /* StopTimes.swift in Sources */,
 				6CA75FC31B114E3900EFC1B1 /* AppDelegate.swift in Sources */,
 				6CA75FC61B114E3900EFC1B1 /* NextPath.xcdatamodeld in Sources */,
-				6C7867A31B1150660014CFC6 /* Stops.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

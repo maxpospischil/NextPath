@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NextPath/ViewController.swift"
-            timestampString = "454121123.036827"
+            timestampString = "454206211.820484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "parseCSV()"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "displayLocationInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NextPath/ViewController.swift"
-            timestampString = "454121323.63897"
+            timestampString = "454206211.820484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "parseCSV()"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "displayLocationInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

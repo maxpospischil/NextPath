@@ -14,7 +14,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     let locationManager = CLLocationManager()
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     
     @IBOutlet weak var addressTextField: UITextView!
@@ -30,6 +29,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        Data().destroyAll()
+        Data().seed()
+        Data().printFirstItem()
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -63,37 +65,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             println(postalCode)
             println(administrativeArea)
             println(country)
-//            parseCSV()
-            printFirstItem()
         }
         
-    }
-    
-    func parseCSV() {
-        var csv: CSV!
-        var csvWithCRLF: CSV!
-        var csvWithManualHeaders: CSV!
-        var error: NSErrorPointer = nil
-        let csvURL = NSBundle(forClass: ViewController.self).URLForResource("stops", withExtension: "csv")
-        csv = CSV(contentsOfURL: csvURL!, error: error)
-        for item in csv.rows {
-            let newStop = NSEntityDescription.insertNewObjectForEntityForName("Stops", inManagedObjectContext: self.managedObjectContext!) as! Stops
-            newStop.id = item["stop_id"]!.toInt()!
-            newStop.name = item["stop_name"]!
-        }
-        managedObjectContext!.save(nil)
-        
-    }
-    
-    func printFirstItem() {
-        // Create a new fetch request using the LogItem entity
-        let fetchRequest = NSFetchRequest(entityName: "Stops")
-        
-        // Execute the fetch request, and cast the results to an array of LogItem objects
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Stops] {
-            
-            println(fetchResults[0])
-        }
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {

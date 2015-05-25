@@ -1,5 +1,5 @@
 //
-//  Stops.swift
+//  Routes.swift
 //  NextPath
 //
 //  Created by Maxwell Pospischil on 5/24/15.
@@ -9,12 +9,10 @@
 import Foundation
 import CoreData
 
-class Stops: NSManagedObject {
+class Routes: NSManagedObject {
 
     @NSManaged var id: NSNumber
-    @NSManaged var lat: NSNumber
-    @NSManaged var lon: NSNumber
     @NSManaged var name: String
-    @NSManaged var times: NSSet
+    @NSManaged var trips: NSSet
 
 }

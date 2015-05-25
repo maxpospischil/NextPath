@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Routes" representedClassName="NextPath.Routes" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trips" inverseName="route" inverseEntity="Trips" syncable="YES"/>
+    </entity>
     <entity name="Stops" representedClassName="NextPath.Stops" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lon" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="times" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StopTimes" inverseName="stop" inverseEntity="StopTimes" syncable="YES"/>
+    </entity>
+    <entity name="StopTimes" representedClassName="NextPath.StopTimes" syncable="YES">
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stops" inverseName="times" inverseEntity="Stops" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trips" inverseName="stops" inverseEntity="Trips" syncable="YES"/>
+    </entity>
+    <entity name="Trips" representedClassName="NextPath.Trips" syncable="YES">
+        <attribute name="headSign" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serviceType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tripId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="route" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routes" inverseName="trips" inverseEntity="Routes" syncable="YES"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StopTimes" inverseName="trip" inverseEntity="StopTimes" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Stops" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Routes" positionX="-99" positionY="-99" width="128" height="88"/>
+        <element name="Stops" positionX="124" positionY="-189" width="128" height="118"/>
+        <element name="StopTimes" positionX="340" positionY="-117" width="128" height="88"/>
+        <element name="Trips" positionX="108" positionY="-27" width="128" height="118"/>
     </elements>
 </model>
