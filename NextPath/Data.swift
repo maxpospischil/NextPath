@@ -29,7 +29,80 @@ public class Data {
     }
     
     func findCurrentTrains() {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitDay, fromDate: date)
+        let hour = components.hour
+        let minutes = components.minute
+        let seconds = components.second
+        let day = components.day
         
+        
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        var timeZone = NSTimeZone(name: "America/New_York")
+        dateFormatter.timeZone = timeZone
+        
+        var dateString = String(hour) + ":" + String(minutes)
+        dateString = dateString + ":" + String(seconds)
+        
+        
+        let now = dateFormatter.dateFromString(dateString)!
+        var thirtyMinsFromNow = NSDate(timeIntervalSinceReferenceDate:now.timeIntervalSinceReferenceDate+1800)
+        let componentsTwo = calendar.components(.CalendarUnitHour, fromDate: thirtyMinsFromNow)
+        let hourTwo = componentsTwo.hour
+        
+        let fetchRequest = NSFetchRequest(entityName: "StopTimes")
+        let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        var predicate1 = NSPredicate(format:"time >= %@", now)
+        var predicate2 = NSPredicate(format: "time <= %@", thirtyMinsFromNow)
+            
+        var compound = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1, predicate2])
+        fetchRequest.predicate = compound
+        
+        var stopTimes = [StopTimes]()
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [StopTimes] {
+            stopTimes = fetchResults
+        }
+        
+        let serviceType = getServiceType()
+        
+        var filteredStopTimes = [StopTimes]()
+        
+        for s in stopTimes {
+            if s.trip.serviceType == serviceType {
+                filteredStopTimes.append(s)
+            }
+        }
+        println(dateString)
+        println(date)
+        println(now)
+        println(thirtyMinsFromNow)
+        
+        println(filteredStopTimes[0].trip.tripId)
+        println(filteredStopTimes[0].time)
+        
+        
+        
+    }
+    
+    func getServiceType()->String{
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let todayDate = NSDate()
+        let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let myComponents = myCalendar.components(.CalendarUnitWeekday, fromDate: todayDate)
+        let weekDay = myComponents.weekday
+        
+        if weekDay == 1{
+            return "sunday"
+        } else if weekDay == 7 {
+            return "saturday"
+        } else {
+            return "weekday"
+        }
     }
     
     
@@ -115,18 +188,28 @@ public class Data {
         for item in csv.rows {
             var dateString = item["departure_time"]! // change to your date format
             
+            var plusDay = false
+            
             if (dateString as NSString).substringToIndex(2) == "24" {
                 dateString = "00" + (dateString as NSString).substringFromIndex(2)
+                plusDay = true
             }
             
             var dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
+            var timeZone = NSTimeZone(name: "America/New_York")
+            dateFormatter.timeZone = timeZone
             
-            var date = dateFormatter.dateFromString(dateString)
+            var date = dateFormatter.dateFromString(dateString)!
+            
+            if plusDay == true {
+                //since we subtracted 24 hours before, we need to add them back 24 hours == 86400 seconds
+                date = NSDate(timeIntervalSinceReferenceDate:date.timeIntervalSinceReferenceDate+86400)
+            }
             
             let newStopTime = NSEntityDescription.insertNewObjectForEntityForName("StopTimes", inManagedObjectContext: self.managedObjectContext!) as! StopTimes
             
-            newStopTime.time = date!
+            newStopTime.time = date
             
             var request = NSFetchRequest(entityName: "Stops")
             request.returnsObjectsAsFaults = false;

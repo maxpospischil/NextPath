@@ -29,9 +29,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        Data().destroyAll()
-        Data().seed()
-        Data().printFirstItem()
+//        Data().destroyAll()
+//        Data().seed()
+//        Data().printFirstItem()
+        Data().findCurrentTrains()
+        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
