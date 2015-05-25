@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import CoreData
+import CoreLocation
 
 public class Data {
     
@@ -28,7 +29,7 @@ public class Data {
         deleteAllStopTimes()
     }
     
-    func findCurrentTrains() {
+    func findCurrentTrains(currentLocation: CLLocation)->[StopTimes] {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitDay, fromDate: date)
@@ -71,8 +72,24 @@ public class Data {
         
         var filteredStopTimes = [StopTimes]()
         
+        var minDistance = 9999999.99
+        
         for s in stopTimes {
-            if s.trip.serviceType == serviceType {
+            let stopLocation = CLLocation(latitude: s.stop.lat.doubleValue, longitude: s.stop.lon.doubleValue)
+            let thisDistance = currentLocation.distanceFromLocation(stopLocation)
+            if thisDistance < minDistance {
+                minDistance = thisDistance
+            }
+        }
+        
+        println("minDistance: ")
+        println(minDistance)
+        println(minDistance/1609.344)
+        
+        for s in stopTimes {
+            let stopLocation = CLLocation(latitude: s.stop.lat.doubleValue, longitude: s.stop.lon.doubleValue)
+            let thisDistance = currentLocation.distanceFromLocation(stopLocation)
+            if s.trip.serviceType == serviceType && thisDistance == minDistance {
                 filteredStopTimes.append(s)
             }
         }
@@ -83,6 +100,8 @@ public class Data {
         
         println(filteredStopTimes[0].trip.tripId)
         println(filteredStopTimes[0].time)
+        
+        return filteredStopTimes
         
         
         

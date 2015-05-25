@@ -15,15 +15,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
-    
-    @IBOutlet weak var addressTextField: UITextView!
+    @IBOutlet weak var trainZero: UITextView!
+    @IBOutlet weak var trainOne: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -32,7 +28,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //        Data().destroyAll()
 //        Data().seed()
 //        Data().printFirstItem()
-        Data().findCurrentTrains()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        println(locationManager.location.coordinate.latitude)
+        var nextTrains = Data().findCurrentTrains(locationManager.location)
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm" //format style. Browse online to get a format that fits your needs.
+        var dateString = dateFormatter.stringFromDate(nextTrains[0].time)
+        trainZero.text = nextTrains[0].stop.name + " " + dateString + " " + nextTrains[0].trip.headSign
+        dateString = dateFormatter.stringFromDate(nextTrains[1].time)
+        trainOne.text = nextTrains[1].stop.name + " " + dateString + " " + nextTrains[1].trip.headSign
         
     }
     
@@ -61,8 +68,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let postalCode = (containsPlacemark.postalCode != nil) ? containsPlacemark.postalCode : ""
             let administrativeArea = (containsPlacemark.administrativeArea != nil) ? containsPlacemark.administrativeArea : ""
             let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
-            addressTextField.text = locality + " " + postalCode + " " + administrativeArea + " " + country
-            addressTextField.editable = false
+//            addressTextField.text = locality + " " + postalCode + " " + administrativeArea + " " + country
+//            addressTextField.editable = false
             println(locality)
             println(postalCode)
             println(administrativeArea)
