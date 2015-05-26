@@ -29,7 +29,7 @@ public class Data {
         deleteAllStopTimes()
     }
     
-    func findCurrentTrains(currentLocation: CLLocation)->[StopTimes] {
+    func findCurrentTrains(currentLocation: CLLocation, placemark: CLPlacemark?)->[StopTimes] {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitDay, fromDate: date)
@@ -82,24 +82,32 @@ public class Data {
             }
         }
         
-        println("minDistance: ")
-        println(minDistance)
-        println(minDistance/1609.344)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        var defaultStop = defaults.stringForKey("fromNJDefault")
+        
+        if placemark!.locality.rangeOfString("York") != nil {
+            defaultStop = defaults.stringForKey("fromNYDefault")
+        }
         
         for s in stopTimes {
             let stopLocation = CLLocation(latitude: s.stop.lat.doubleValue, longitude: s.stop.lon.doubleValue)
             let thisDistance = currentLocation.distanceFromLocation(stopLocation)
             if s.trip.serviceType == serviceType && thisDistance == minDistance {
-                filteredStopTimes.append(s)
+                for st:StopTimes in s.trip.stops.allObjects as! [StopTimes] {
+                    if (st.stop.name.rangeOfString(defaultStop!) != nil) {
+                        if st.time.compare(now) == NSComparisonResult.OrderedDescending {
+                            filteredStopTimes.append(s)
+                            break
+                        }
+                    }
+                }
+                
             }
         }
-        println(dateString)
-        println(date)
-        println(now)
-        println(thirtyMinsFromNow)
         
-        println(filteredStopTimes[0].trip.tripId)
-        println(filteredStopTimes[0].time)
+        println(minDistance/1600)
+        
         
         return filteredStopTimes
         
