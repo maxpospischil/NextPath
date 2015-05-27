@@ -29,7 +29,7 @@ public class Data {
         deleteAllStopTimes()
     }
     
-    func findCurrentTrains(currentLocation: CLLocation, placemark: CLPlacemark?)->[StopTimes] {
+    func findCurrentTrains(currentLocation: CLLocation, locality: String)->[StopTimes] {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitDay, fromDate: date)
@@ -86,7 +86,7 @@ public class Data {
         
         var defaultStop = defaults.stringForKey("fromNJDefault")
         
-        if placemark!.locality.rangeOfString("York") != nil {
+        if locality.rangeOfString("York") != nil {
             defaultStop = defaults.stringForKey("fromNYDefault")
         }
         
